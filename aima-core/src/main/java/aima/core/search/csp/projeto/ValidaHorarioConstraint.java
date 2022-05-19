@@ -7,9 +7,9 @@ import aima.core.search.csp.Assignment;
 import aima.core.search.csp.Constraint;
 import aima.core.search.csp.Variable;
 
-//Classe Restricao, contém a restrição que verifica se determinado está contido no domínio de horários preferíveis de um
-//funcionario
-public class Restricao implements Constraint<Variable, Double> {
+//Classe Restricao, contém a restrição que verifica se determinado horário está contido no domínio de horários preferíveis de um
+//funcionário
+public class ValidaHorarioConstraint implements Constraint<Variable, Double> {
 	//Variável 1
 	private Variable var1;
 	//Variável 2
@@ -17,7 +17,7 @@ public class Restricao implements Constraint<Variable, Double> {
 	//Escopo com as duas variáveis
 	private List<Variable> scope;
 	//Construtor
-	public Restricao(Variable var1, Variable var2) {
+	public ValidaHorarioConstraint(Variable var1, Variable var2) {
 		this.var1 = var1;
 		this.var2 = var2;
 		scope = new ArrayList<Variable>(2);

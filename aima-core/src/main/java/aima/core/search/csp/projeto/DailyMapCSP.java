@@ -31,7 +31,7 @@ public class DailyMapCSP extends CSP<Variable, Double>{
 							Variable var1 = getVariables().get(i);
 							Variable var2 = getVariables().get(c);
 							addConstraint(new NotEqualConstraint<>(var1, var2));
-							addConstraint(new Restricao(var1, var2));
+							addConstraint(new ValidaHorarioConstraint(var1, var2));
 							System.out.println("var1: " + var1 + ". Var2: " + var2);
 						}
 					}

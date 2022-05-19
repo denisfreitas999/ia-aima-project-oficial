@@ -2,7 +2,7 @@ package aima.core.search.csp.projeto;
 
 import java.util.ArrayList;
 
-//Classe que 
+//Classe de teste
 public class CasoTeste1 {
 	//Matriz de horários [abriga o funcionário e o horário que será escolhido para ele trabalhar]
 	private final Horario[][] horario= new Horario[12][2];
@@ -16,7 +16,6 @@ public class CasoTeste1 {
 			}
 		}
 	}
-	
 	
 	//Get da matriz.
 	public Horario[][] getHorario() {

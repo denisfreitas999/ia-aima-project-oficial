@@ -149,7 +149,7 @@ public class demo {
 				funcionarios[solucao.getValue(var).intValue()] = var.getName().substring(0, var.getName().length() - 1);
 				teste.setFuncionario(var.getName().substring(0, var.getName().length() - 1), solucao.getValue(var));
 			}
-				//Teste prelimanar
+				//Teste preliminar
 				/* 
 				for(int i = 0; i < 24; i++) {
 					System.out.println(i + ":00. Funcionario: " + funcionarios[i]);
