@@ -70,9 +70,6 @@ public class DailyMapCSP extends CSP<Variable, Double>{
 									addConstraint(new ValidaHorarioConstraint(var1, var2));
 									break;
 							}
-							addConstraint(new NotEqualConstraint<>(var1, var2));
-							addConstraint(new ValidaHorarioConstraint(var1, var2));
-							System.out.println("var1: " + var1 + ". Var2: " + var2);
 						}
 					}
 					contador++;
