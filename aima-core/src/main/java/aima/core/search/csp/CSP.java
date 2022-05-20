@@ -82,7 +82,7 @@ public class CSP<VAR extends Variable, VAL> implements Cloneable {
     }
 
     public void setDomain(VAR var, Domain<VAL> domain) {
-    	//System.out.println("setDomain -> Variavel: " + var + " Dominio: " + domain + " indexOf(var): " + indexOf(var));
+    	System.out.println("setDomain -> Variavel: " + var + " Dominio: " + domain + " indexOf(var): " + indexOf(var));
         domains.set(indexOf(var), domain);
     }
 

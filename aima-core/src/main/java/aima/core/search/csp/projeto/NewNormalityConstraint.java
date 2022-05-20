@@ -7,9 +7,7 @@ import aima.core.search.csp.Assignment;
 import aima.core.search.csp.Constraint;
 import aima.core.search.csp.Variable;
 
-//Classe Restricao, contém a restrição que verifica se determinado horário está contido no domínio de horários preferíveis de um
-//funcionário
-public class ValidaHorarioConstraint implements Constraint<Variable, Double> {
+public class NewNormalityConstraint implements Constraint<Variable, Double> {
 	//Variável 1
 	private Variable var1;
 	//Variável 2
@@ -17,7 +15,7 @@ public class ValidaHorarioConstraint implements Constraint<Variable, Double> {
 	//Escopo com as duas variáveis
 	private List<Variable> scope;
 	//Construtor
-	public ValidaHorarioConstraint(Variable var1, Variable var2) {
+	public NewNormalityConstraint(Variable var1, Variable var2) {
 		this.var1 = var1;
 		this.var2 = var2;
 		scope = new ArrayList<Variable>(2);
@@ -31,10 +29,14 @@ public class ValidaHorarioConstraint implements Constraint<Variable, Double> {
 		Double value1 = assignment.getValue(var1);
 		Double value2 = assignment.getValue(var2);
 		if(value1 == null && value2 == null) return true;
-		if(value1 == null)
-			if(var2.getHorarios().contains(value2)) return true;
-		if(value2 == null)
-			if(var1.getHorarios().contains(value1)) return true;
+		String name1 = var1.getName().substring(0, var1.getName().length() - 1);
+		String name2 = var2.getName().substring(0, var2.getName().length() - 1);
+		System.out.println(name1 + " : " + name2);
+		if(name1.equals(name2) && value1 == value2) return false;
+		if(!var1.isVacinado() || !var2.isVacinado()) 
+			if(value1 == value2) return false;
+		if(value1 == null && var2.getHorarios().contains(value2)) return true;
+		if(value2 == null && var1.getHorarios().contains(value1)) return true;
 		if(var1.getHorarios().contains(value1) && var2.getHorarios().contains(value2)) return true;
 		return false;
 	}
@@ -49,16 +51,13 @@ public class ValidaHorarioConstraint implements Constraint<Variable, Double> {
 		return var1;
 	}
 
-
 	public void setVar1(Variable var1) {
 		this.var1 = var1;
 	}
 
-
 	public Variable getVar2() {
 		return var2;
 	}
-
 
 	public void setVar2(Variable var2) {
 		this.var2 = var2;

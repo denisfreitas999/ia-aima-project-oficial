@@ -32,7 +32,7 @@ public class demo {
 		alicehorarios.add(13.0);
 		alicehorarios.add(19.0);
 		alicehorarios.add(21.0);
-		alicehorarios.add(22.0);
+		alicehorarios.add(22.0);;
 		
 		Dominio alicedomain = new Dominio(alicefunc, alicehorarios);
 		//-------------------------------------------------------------
@@ -91,7 +91,7 @@ public class demo {
 		//-------------------------------------------------------------
 		
 		//Adição dos domínios a Lista
-		Lista lista = new Lista();
+		Lista lista = new Lista(1);
 		lista.setDomain(alicedomain);
 		lista.setDomain(bobdomain);
 		lista.setDomain(charliedomain);
@@ -146,15 +146,15 @@ public class demo {
 			List<Variable> variaveis = solucao.getVariables();
 			String[] funcionarios = new String[24];
 			for(Variable var : variaveis) {
-				funcionarios[solucao.getValue(var).intValue()] = var.getName().substring(0, var.getName().length() - 1);
+				funcionarios[solucao.getValue(var).intValue()] += var.getName().substring(0, var.getName().length() - 1);
 				teste.setFuncionario(var.getName().substring(0, var.getName().length() - 1), solucao.getValue(var));
 			}
 				//Teste preliminar
-				/* 
+				 
 				for(int i = 0; i < 24; i++) {
 					System.out.println(i + ":00. Funcionario: " + funcionarios[i]);
 				}
-				*/
+				
 			System.out.println(teste.toString());
 		}
 		catch(NoSuchElementException e){

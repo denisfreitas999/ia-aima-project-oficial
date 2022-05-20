@@ -7,9 +7,7 @@ import aima.core.search.csp.Assignment;
 import aima.core.search.csp.Constraint;
 import aima.core.search.csp.Variable;
 
-//Classe Restricao, contém a restrição que verifica se determinado horário está contido no domínio de horários preferíveis de um
-//funcionário
-public class ValidaHorarioConstraint implements Constraint<Variable, Double> {
+public class PriotityWorkingConstraint implements Constraint<Variable, Double> {
 	//Variável 1
 	private Variable var1;
 	//Variável 2
@@ -17,7 +15,7 @@ public class ValidaHorarioConstraint implements Constraint<Variable, Double> {
 	//Escopo com as duas variáveis
 	private List<Variable> scope;
 	//Construtor
-	public ValidaHorarioConstraint(Variable var1, Variable var2) {
+	public PriotityWorkingConstraint(Variable var1, Variable var2) {
 		this.var1 = var1;
 		this.var2 = var2;
 		scope = new ArrayList<Variable>(2);
@@ -31,10 +29,23 @@ public class ValidaHorarioConstraint implements Constraint<Variable, Double> {
 		Double value1 = assignment.getValue(var1);
 		Double value2 = assignment.getValue(var2);
 		if(value1 == null && value2 == null) return true;
-		if(value1 == null)
-			if(var2.getHorarios().contains(value2)) return true;
-		if(value2 == null)
-			if(var1.getHorarios().contains(value1)) return true;
+		if(value1 == value2) return false;
+		if(value1 != null) {
+			for(Variable var : assignment.getVariables()) {
+				String nameVar = var.getName().substring(0, var.getName().length() - 1);
+				if(var1.getFuncionariosPrioritarios().contains(nameVar))
+					if(assignment.getValue(var) > value1) return false;	
+			}
+			if(var1.getHorarios().contains(value1) && value2 == null) return true;
+		}
+		if(value2 != null) {
+			for(Variable var : assignment.getVariables()) {
+				String nameVar = var.getName().substring(0, var.getName().length() - 1);
+				if(var2.getFuncionariosPrioritarios().contains(nameVar))
+					if(assignment.getValue(var2) > value2) return false;	
+			}
+			if(var2.getHorarios().contains(value2) && value1 == null) return true;
+		}
 		if(var1.getHorarios().contains(value1) && var2.getHorarios().contains(value2)) return true;
 		return false;
 	}

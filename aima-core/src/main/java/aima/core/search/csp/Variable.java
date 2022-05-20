@@ -11,10 +11,24 @@ import java.util.ArrayList;
 public class Variable {
     private final String name;
     private ArrayList<Double> horarios;
+    private boolean vacinado;
+    private ArrayList<String> funcionariosPrioritarios;
     
     public Variable(String name, ArrayList<Double> horarios) {
         this.name = name;
         this.horarios = horarios;
+    }
+    
+    public Variable(String name, ArrayList<Double> horarios, ArrayList<String> funcionariosPrioritarios) {
+        this.name = name;
+        this.horarios = horarios;
+        this.funcionariosPrioritarios = funcionariosPrioritarios;
+    }
+    
+    public Variable(String name, ArrayList<Double> horarios, boolean vacinado) {
+        this.name = name;
+        this.horarios = horarios;
+        this.vacinado = vacinado;
     }
     
     public Variable(String name) {
@@ -48,4 +62,20 @@ public class Variable {
 		this.horarios = horarios;
 	}
 
+	public boolean isVacinado() {
+		return vacinado;
+	}
+
+	public void setVacinado(boolean vacinado) {
+		this.vacinado = vacinado;
+	}
+
+	public ArrayList<String> getFuncionariosPrioritarios() {
+		return funcionariosPrioritarios;
+	}
+
+	public void setFuncionariosPrioritarios(ArrayList<String> funcionariosPrioritarios) {
+		this.funcionariosPrioritarios = funcionariosPrioritarios;
+	}
+	
 }

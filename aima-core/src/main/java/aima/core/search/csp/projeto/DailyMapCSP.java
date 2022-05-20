@@ -15,11 +15,32 @@ public class DailyMapCSP extends CSP<Variable, Double>{
 				ArrayList<Double> hours = new ArrayList<>();
 				for(Dominio dominio : lista.getLista()) {
 					for(int j = 0; j < dominio.getFuncionario().getHoras(); j++) {
-						addVariable(new Variable(dominio.getFuncionario().getNome() + j, dominio.getHorarios()));
+						switch(lista.getVariante()) {
+							case 1: // variante normal
+								addVariable(new Variable(dominio.getFuncionario().getNome() + j, dominio.getHorarios()));
+								break;
+							
+							case 2: //variante dependencia do funcionario
+								addVariable(new Variable(dominio.getFuncionario().getNome() + j, dominio.getHorarios(), dominio.getFuncionario().getFuncionariosPrioritarios()));
+								break;
+							
+							case 3: //variante nova normalidade
+								addVariable(new Variable(dominio.getFuncionario().getNome() + j, dominio.getHorarios(), dominio.getFuncionario().isVacinado()));
+								break;
+							case 4: // variante restricao de horario
+								addVariable(new Variable(dominio.getFuncionario().getNome() + j, dominio.getHorarios()));
+								break;
+						}
 					}
 					//Adição dos domínios
-					for(Double hour : dominio.getHorarios())
-						if(!hours.contains(hour)) hours.add(hour);
+					if(lista.getVariante() == 4) {
+						for(Double hour: dominio.getHorarios())
+							if(!hours.contains(hour) && hour <= lista.getHorarioFuncionamento()[1] && hour >= lista.getHorarioFuncionamento()[0])
+								hours.add(hour);
+					}
+					else
+						for(Double hour : dominio.getHorarios())
+							if(!hours.contains(hour)) hours.add(hour);
 				}
 				Domain<Double> hoursDomain = new Domain<>(hours);
 				for(Variable var : getVariables())
@@ -30,6 +51,25 @@ public class DailyMapCSP extends CSP<Variable, Double>{
 						if(i != c) {
 							Variable var1 = getVariables().get(i);
 							Variable var2 = getVariables().get(c);
+							switch(lista.getVariante()) {
+								case 1: // variante normal
+									addConstraint(new NotEqualConstraint<>(var1, var2));
+									addConstraint(new ValidaHorarioConstraint(var1, var2));
+									//addConstraint(new EarlyConstraint(var1, var2));
+									break;
+								
+								case 2: //variante dependencia do funcionario
+									addConstraint(new PriotityWorkingConstraint(var1, var2));
+									break;
+								
+								case 3: //variante nova normalidade
+									addConstraint(new NewNormalityConstraint(var1, var2));
+									break;
+								case 4: // variante restricao de horario
+									addConstraint(new NotEqualConstraint<>(var1, var2));
+									addConstraint(new ValidaHorarioConstraint(var1, var2));
+									break;
+							}
 							addConstraint(new NotEqualConstraint<>(var1, var2));
 							addConstraint(new ValidaHorarioConstraint(var1, var2));
 							System.out.println("var1: " + var1 + ". Var2: " + var2);
