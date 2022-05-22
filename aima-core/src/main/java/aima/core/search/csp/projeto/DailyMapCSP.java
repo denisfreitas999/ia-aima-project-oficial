@@ -59,7 +59,7 @@ public class DailyMapCSP extends CSP<Variable, Double>{
 									break;
 								
 								case 2: //variante dependencia do funcionario
-									addConstraint(new PriotityWorkingConstraint(var1, var2));
+									addConstraint(new PriorityWorkingConstraint(var1, var2));
 									break;
 								
 								case 3: //variante nova normalidade

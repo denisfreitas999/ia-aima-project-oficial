@@ -7,7 +7,7 @@ import aima.core.search.csp.Assignment;
 import aima.core.search.csp.Constraint;
 import aima.core.search.csp.Variable;
 
-public class PriotityWorkingConstraint implements Constraint<Variable, Double> {
+public class PriorityWorkingConstraint implements Constraint<Variable, Double> {
 	//Variável 1
 	private Variable var1;
 	//Variável 2
@@ -15,7 +15,7 @@ public class PriotityWorkingConstraint implements Constraint<Variable, Double> {
 	//Escopo com as duas variáveis
 	private List<Variable> scope;
 	//Construtor
-	public PriotityWorkingConstraint(Variable var1, Variable var2) {
+	public PriorityWorkingConstraint(Variable var1, Variable var2) {
 		this.var1 = var1;
 		this.var2 = var2;
 		scope = new ArrayList<Variable>(2);

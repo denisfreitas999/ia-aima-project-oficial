@@ -19,6 +19,17 @@ public class demo {
 	
 	public static void main(String[] args) {
 		//Criação dos funcionários
+		ArrayList<String> alice1 = new ArrayList<>();
+		ArrayList<String> bob1 = new ArrayList<>();
+		bob1.add("Alice");
+		ArrayList<String> charlie1 = new ArrayList<>();
+		charlie1.add("Eve");
+		/*Funcionario alicefunc = new Funcionario("Alice", 2.0, alice1);
+		Funcionario bobfunc = new Funcionario("Bob", 3.0, bob1);
+		Funcionario charliefunc = new Funcionario("Charlie", 1.0, charlie1);
+		Funcionario davidfunc = new Funcionario("David", 2.0, alice1);
+		Funcionario evefunc = new Funcionario("Eve", 4.0, alice1);
+		 * */
 		Funcionario alicefunc = new Funcionario("Alice", 2.0, true);
 		Funcionario bobfunc = new Funcionario("Bob", 3.0, false);
 		Funcionario charliefunc = new Funcionario("Charlie", 1.0, true);
@@ -32,7 +43,7 @@ public class demo {
 		alicehorarios.add(13.0);
 		alicehorarios.add(19.0);
 		alicehorarios.add(21.0);
-		alicehorarios.add(22.0);;
+		alicehorarios.add(22.0);
 		
 		Dominio alicedomain = new Dominio(alicefunc, alicehorarios);
 		//-------------------------------------------------------------
@@ -164,16 +175,10 @@ public class demo {
 					break;
 			}
 			
-				//Teste preliminar
-				 
-				/*for(int i = 0; i < 24; i++) {
-					System.out.println(i + ":00. Funcionario: " + funcionarios[i]);
-				}*/
-				
 			System.out.println(teste.toString());
 		}
 		catch(NoSuchElementException e){
-			System.out.println("O CSP não possui solução!\n");
+			System.out.println("O CSP não possui solução!");
 		}
 	}
 }
