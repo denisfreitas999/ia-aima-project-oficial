@@ -19,11 +19,11 @@ public class demo {
 	
 	public static void main(String[] args) {
 		//Criação dos funcionários
-		Funcionario alicefunc = new Funcionario("Alice", 2.0);
-		Funcionario bobfunc = new Funcionario("Bob", 3.0);
-		Funcionario charliefunc = new Funcionario("Charlie", 1.0);
-		Funcionario davidfunc = new Funcionario("David", 2.0);
-		Funcionario evefunc = new Funcionario("Eve", 4.0);
+		Funcionario alicefunc = new Funcionario("Alice", 2.0, true);
+		Funcionario bobfunc = new Funcionario("Bob", 3.0, false);
+		Funcionario charliefunc = new Funcionario("Charlie", 1.0, true);
+		Funcionario davidfunc = new Funcionario("David", 2.0, false);
+		Funcionario evefunc = new Funcionario("Eve", 4.0, false);
 		
 		//Criação dos domínios
 		//-------------------------------------------------------------
@@ -145,10 +145,24 @@ public class demo {
 			Assignment<Variable, Double> solucao = solution.get();
 			List<Variable> variaveis = solucao.getVariables();
 			String[] funcionarios = new String[24];
-			for(Variable var : variaveis) {
-				funcionarios[solucao.getValue(var).intValue()] = var.getName().substring(0, var.getName().length() - 1);
-				teste.setFuncionario(var.getName().substring(0, var.getName().length() - 1), solucao.getValue(var));
+			switch(lista.getVariante()) {
+				case 3:
+					for(int i = 0; i < funcionarios.length; i++) 
+						funcionarios[i] = "";
+					for(Variable var : variaveis)
+						funcionarios[solucao.getValue(var).intValue()] += var.getName().substring(0, var.getName().length() - 1) + " ";
+					for(int i = 0; i < funcionarios.length; i++) 
+						if(funcionarios[i] != null)
+							teste.setFuncionario(funcionarios[i], (double) i);
+					break;
+				default:
+					for(Variable var : variaveis) {
+						funcionarios[solucao.getValue(var).intValue()] = var.getName().substring(0, var.getName().length() - 1);
+						teste.setFuncionario(var.getName().substring(0, var.getName().length() - 1), solucao.getValue(var));
+					}
+					break;
 			}
+			
 				//Teste preliminar
 				 
 				/*for(int i = 0; i < 24; i++) {

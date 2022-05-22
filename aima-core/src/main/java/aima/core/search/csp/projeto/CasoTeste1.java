@@ -110,11 +110,11 @@ public class CasoTeste1 {
 		}else if(horas == 23.0) {
 			horario[10][1].setFuncionario(funcionario);
 			horario[10][1].setHoras(horas);
-		}else if(horas == 24.0) {
+		}else if(horas == 0.0 || horas == 24.0) {
 			horario[11][1].setFuncionario(funcionario);
 			horario[11][1].setHoras(horas);
 		}else {
-			System.out.println("ERRO: O Hor�rio " + horas + " � inv�lido. Digite um hor�rio entre 1:00 e 23:00 considerando saltos de 1 em 1 hora");
+			System.out.println("ERRO: O Horario " + horas + " invalido. Digite um horario entre 1:00 e 23:00 considerando saltos de 1 em 1 hora");
 		}
 	}
 	
