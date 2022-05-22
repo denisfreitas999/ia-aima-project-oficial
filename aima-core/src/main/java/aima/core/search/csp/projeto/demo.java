@@ -134,7 +134,8 @@ public class demo {
 		CspSolver<Variable, Double> solver;
 		Optional<Assignment<Variable, Double>> solution;
 		
-		solver = new FlexibleBacktrackingSolver<Variable, Double>().set(new AC3Strategy<>()).set(CspHeuristics.mrv()).set(CspHeuristics.lcv());
+		solver = new FlexibleBacktrackingSolver<Variable, Double>().set(new AC3Strategy<>()).set(CspHeuristics.lcv());
+		//solver = new FlexibleBacktrackingSolver<Variable, Double>().set(new AC3Strategy<>()).set(CspHeuristics.mrv()).set(CspHeuristics.lcv());
 		solver.addCspListener(stepCounter);
 		stepCounter.reset();
 		System.out.println(Cores.ANSI_GREEN+ "############# Execucão #############" + Cores.ANSI_RESET);
